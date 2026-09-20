@@ -140,6 +140,10 @@ int main(void)
     //--------------------------------------------------------------------------------------
     RL_FREE(transforms);    // Free transforms
 
+    UnloadMesh(cube);
+    UnloadMaterial(matInstances);   // frees matInstances.maps[] + shader
+    UnloadMaterial(matDefault);     // frees matDefault.maps[] (shader is default, skipped)
+
     CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
