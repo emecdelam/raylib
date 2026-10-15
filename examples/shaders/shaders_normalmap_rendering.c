@@ -163,6 +163,9 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
+    UnloadTexture(plane.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture);
+    UnloadTexture(plane.materials[0].maps[MATERIAL_MAP_NORMAL].texture);
+
     UnloadShader(shader);
     UnloadModel(plane);
 

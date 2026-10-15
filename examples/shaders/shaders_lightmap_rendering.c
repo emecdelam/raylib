@@ -165,10 +165,16 @@ int main(void)
     // De-Initialization
     //--------------------------------------------------------------------------------------
     UnloadMesh(mesh);       // Unload the mesh
-    UnloadShader(shader);   // Unload shader
+
+    // Detach externally-owned textures from the material so UnloadMaterial doesn't try to delete them again
+    material.maps[MATERIAL_MAP_ALBEDO].texture    = (Texture2D){0};
+    material.maps[MATERIAL_MAP_METALNESS].texture = (Texture2D){0};
+    UnloadMaterial(material);   // frees material.maps[] array
     UnloadTexture(texture); // Unload texture
     UnloadTexture(light);   // Unload texture
+    UnloadRenderTexture(lightmap);
 
+    UnloadShader(shader);   // Unload shader
     CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
