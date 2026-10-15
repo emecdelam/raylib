@@ -139,6 +139,9 @@ int main(void)
     // De-Initialization
     //--------------------------------------------------------------------------------------
     RL_FREE(transforms);    // Free transforms
+    UnloadMaterial(matInstances);    // Also unloads the instancing shader
+    UnloadMaterial(matDefault);      // Unload default material
+    UnloadMesh(cube);                // Unload cube mesh
 
     UnloadMesh(cube);
     UnloadMaterial(matInstances);   // frees matInstances.maps[] + shader

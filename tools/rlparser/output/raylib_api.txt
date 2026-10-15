@@ -14,7 +14,7 @@ Define 002: RAYLIB_VERSION_MAJOR
 Define 003: RAYLIB_VERSION_MINOR
   Name: RAYLIB_VERSION_MINOR
   Type: INT
-  Value: 1
+  Value: 2
   Description: 
 Define 004: RAYLIB_VERSION_PATCH
   Name: RAYLIB_VERSION_PATCH
@@ -24,7 +24,7 @@ Define 004: RAYLIB_VERSION_PATCH
 Define 005: RAYLIB_VERSION
   Name: RAYLIB_VERSION
   Type: STRING
-  Value: "6.1-dev"
+  Value: "6.2"
   Description: 
 Define 006: __declspec(x)
   Name: __declspec(x)
@@ -394,7 +394,7 @@ Struct 13: Camera3D (5 fields)
 Struct 14: Camera2D (4 fields)
   Name: Camera2D
   Description: Camera2D, defines position/orientation in 2d space
-  Field[1]: Vector2 offset // Camera offset (screen space offset from window origin)
+  Field[1]: Vector2 offset // Camera offset (screen space offset from window origin, unscaled by DPI, real pixel size)
   Field[2]: Vector2 target // Camera target (world space target point that is mapped to screen space offset)
   Field[3]: float rotation // Camera rotation in degrees (pivots around target)
   Field[4]: float zoom // Camera zoom (scaling around target), must not be set to 0, set to 1.0f for no scale
@@ -1558,7 +1558,7 @@ Function 104: TakeScreenshot() (1 input parameters)
 Function 105: SetConfigFlags() (1 input parameters)
   Name: SetConfigFlags
   Return type: void
-  Description: Set up init configuration flags (view FLAGS)
+  Description: Set init configuration flags (view FLAGS)
   Param[1]: flags (type: unsigned int)
 Function 106: OpenURL() (1 input parameters)
   Name: OpenURL

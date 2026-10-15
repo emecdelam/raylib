@@ -303,13 +303,15 @@ void ToggleBorderlessWindowed(void)
             }
             else
             {
+                // Remove undecorated flag
+                // WARNING: Decorating the window resizes it, launching FramebufferSizeCallback() that
+                // overwrites screen size and position, so it must be done before restoring previous values
+                glfwSetWindowAttrib(platform.handle, GLFW_DECORATED, GLFW_TRUE);
+                FLAG_CLEAR(CORE.Window.flags, FLAG_WINDOW_UNDECORATED);
+
                 // Restore previous screen values
                 CORE.Window.position = CORE.Window.previousPosition;
                 CORE.Window.screen = CORE.Window.previousScreen;
-
-                // Remove undecorated flag
-                glfwSetWindowAttrib(platform.handle, GLFW_DECORATED, GLFW_TRUE);
-                FLAG_CLEAR(CORE.Window.flags, FLAG_WINDOW_UNDECORATED);
 
             #if !defined(__APPLE__) && !defined(_GLFW_WAYLAND)
                 // Make sure to restore size considering HighDPI scaling
@@ -1222,7 +1224,6 @@ void OpenURL(const char *url)
 #if defined(__APPLE__)
         sprintf(cmd, "open '%s'", url);
 #endif
-        // TODO: Replace system() call by custom process
         int result = system(cmd);
 
         if (result == -1) TRACELOG(LOG_WARNING, "OpenURL() child process could not be created");
@@ -1676,8 +1677,8 @@ int InitPlatform(void)
         // If the area requested by the user exceeds the maximum workable area, clamp it to that
         // GLFW has a problem where if the window is greater than the workable area (this means
         // the taskbar / dockable areas) it won't show up if the window isn't fullscreen
-        if (CORE.Window.screen.width > workWidth) CORE.Window.screen.width = workWidth;
-        if (CORE.Window.screen.height > workHeight) CORE.Window.screen.height = workHeight;
+        if (CORE.Window.screen.width > (unsigned int)workWidth) CORE.Window.screen.width = workWidth;
+        if (CORE.Window.screen.height > (unsigned int)workHeight) CORE.Window.screen.height = workHeight;
 
         platform.handle = glfwCreateWindow(CORE.Window.screen.width, CORE.Window.screen.height, (CORE.Window.title != 0)? CORE.Window.title : " ", NULL, NULL);
         if (!platform.handle)
@@ -2094,7 +2095,7 @@ static void WindowDropCallback(GLFWwindow *window, int count, const char **paths
 // GLFW3: Keyboard callback, runs on key pressed
 static void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-    if (key < 0) return;    // Security check, macOS fn key generates -1
+    if ((key < 0) || (key >= MAX_KEYBOARD_KEYS)) return; // Security check, macOS fn key generates -1
 
     // WARNING: GLFW could return GLFW_REPEAT, it needs to be considered as 1
     // to work properly with our implementation (IsKeyDown/IsKeyUp checks)

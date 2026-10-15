@@ -71,7 +71,7 @@ endif
 
 # Define required raylib variables
 PROJECT_NAME          ?= raylib_examples
-RAYLIB_VERSION        ?= 6.0.0
+RAYLIB_VERSION        ?= 6.2.0
 RAYLIB_PATH           ?= ..
 
 # Define raylib source code path
@@ -180,7 +180,7 @@ ifeq ($(TARGET_PLATFORM),$(filter $(TARGET_PLATFORM),PLATFORM_WEB PLATFORM_WEB_R
 		EMSCRIPTEN_PATH    ?= $(EMSDK_PATH)/upstream/emscripten
 		CLANG_PATH          = $(EMSDK_PATH)/upstream/bin
 		PYTHON_PATH         = $(EMSDK_PATH)/python/3.13.3_64bit
-		NODE_PATH           = $(EMSDK_PATH)/node/22.16.0_64bit/bin
+		NODE_PATH           = $(EMSDK_PATH)/node/24.19.0_64bit/bin
 		export PATH         = $(EMSDK_PATH);$(EMSCRIPTEN_PATH);$(CLANG_PATH);$(NODE_PATH);$(PYTHON_PATH):$$(PATH)
     endif
 endif
@@ -605,6 +605,7 @@ SHAPES = \
     shapes/shapes_easings_box \
     shapes/shapes_easings_rectangles \
     shapes/shapes_easings_testbed \
+    shapes/shapes_ellipse_collision \
     shapes/shapes_following_eyes \
     shapes/shapes_hilbert_curve \
     shapes/shapes_kaleidoscope \
@@ -615,8 +616,11 @@ SHAPES = \
     shapes/shapes_math_angle_rotation \
     shapes/shapes_math_sine_cosine \
     shapes/shapes_mouse_trail \
+    shapes/shapes_outlines_testbed \
+    shapes/shapes_outlines_thickness \
     shapes/shapes_penrose_tile \
     shapes/shapes_pie_chart \
+    shapes/shapes_polygon_lines \
     shapes/shapes_rectangle_advanced \
     shapes/shapes_rectangle_scaling \
     shapes/shapes_recursive_tree \
@@ -654,6 +658,7 @@ TEXTURES = \
     textures/textures_npatch_drawing \
     textures/textures_particles_blending \
     textures/textures_polygon_drawing \
+    textures/textures_portal_window \
     textures/textures_raw_data \
     textures/textures_screen_buffer \
     textures/textures_sprite_animation \
@@ -667,6 +672,7 @@ TEXTURES = \
 
 TEXT = \
     text/text_3d_drawing \
+    text/text_animations \
     text/text_codepoints_loading \
     text/text_font_filters \
     text/text_font_loading \
@@ -705,8 +711,10 @@ MODELS = \
     models/models_loading_vox \
     models/models_mesh_generation \
     models/models_mesh_picking \
+    models/models_mesh_uv_painting \
     models/models_orthographic_projection \
     models/models_point_rendering \
+    models/models_procedural_decals \
     models/models_rlgl_solar_system \
     models/models_rotating_cube \
     models/models_skybox_rendering \
@@ -732,6 +740,7 @@ SHADERS = \
     shaders/shaders_hybrid_rendering \
     shaders/shaders_julia_set \
     shaders/shaders_lightmap_rendering \
+    shaders/shaders_lights_bloom \
     shaders/shaders_mandelbrot_set \
     shaders/shaders_mesh_instancing \
     shaders/shaders_model_shader \
@@ -753,6 +762,7 @@ SHADERS = \
     shaders/shaders_vertex_displacement
 
 AUDIO = \
+    audio/audio_amp_envelope \
     audio/audio_mixed_processor \
     audio/audio_module_playing \
     audio/audio_music_stream \

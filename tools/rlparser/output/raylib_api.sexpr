@@ -9,7 +9,7 @@
     (description ""))
    ((name "RAYLIB_VERSION_MINOR")
     (type "INT")
-    (value 1)
+    (value 2)
     (description ""))
    ((name "RAYLIB_VERSION_PATCH")
     (type "INT")
@@ -17,7 +17,7 @@
     (description ""))
    ((name "RAYLIB_VERSION")
     (type "STRING")
-    (value "6.1-dev")
+    (value "6.2")
     (description ""))
    ((name "__declspec(x)")
     (type "MACRO")
@@ -486,7 +486,7 @@
     (fields 
       ((type "Vector2")
        (name "offset")
-       (description "Camera offset (screen space offset from window origin)"))
+       (description "Camera offset (screen space offset from window origin, unscaled by DPI, real pixel size)"))
       ((type "Vector2")
        (name "target")
        (description "Camera target (world space target point that is mapped to screen space offset)"))
@@ -2787,7 +2787,7 @@
        ((type "const char *") (name "fileName"))))
 
     ((name "SetConfigFlags")
-     (description "Set up init configuration flags (view FLAGS)")
+     (description "Set init configuration flags (view FLAGS)")
      (return-type "void")
      (params
        ((type "unsigned int") (name "flags"))))
